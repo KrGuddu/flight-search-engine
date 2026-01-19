@@ -1,6 +1,6 @@
-import { createTheme } from '@mui/material/styles';
+import { createTheme } from '@mui/material/styles'
 
-const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
 
 const theme = createTheme({
   palette: {
@@ -34,6 +34,6 @@ const theme = createTheme({
       },
     },
   },
-});
+})
 
-export default theme;
+export default theme
