@@ -4,7 +4,6 @@ import InputDate from './InputDate'
 import InputDest from './InputDest'
 import InputOrig from './InputOrig'
 import airportData from './airports.json'
-// import fetchFromAPI from '../utils/fetchFromAPI'
 import fetchFromAPI from './utils/fetchFromAPI'
 import dayjs from 'dayjs'
 
@@ -34,7 +33,6 @@ const Input = ({ setFlightData, setIsLoading }) => {
 
     try {
       const data = await fetchFromAPI(originCode, destCode, departureDate, returnDateParam)
-      console.log("Raw Amadeus response:", data)
 
       if (!data || !data.data || data.data.length === 0) {
         alert("No available flights.")
@@ -44,8 +42,15 @@ const Input = ({ setFlightData, setIsLoading }) => {
 
       const mappedFlights = data.data.map((offer) => {
         const itinerary = offer.itineraries[0]
-        const segment = itinerary.segments[0]
-        const lastSegment = itinerary.segments[itinerary.segments.length - 1]
+        const segments = itinerary.segments
+        const firstSegment = segments[0]
+        const lastSegment = segments[segments.length - 1]
+
+        const totalMinutes = segments.reduce((acc, seg) => {
+          const dep = new Date(seg.departure.at)
+          const arr = new Date(seg.arrival.at)
+          return acc + (arr - dep) / (1000 * 60)
+        }, 0)
 
         return {
           price: {
@@ -53,16 +58,12 @@ const Input = ({ setFlightData, setIsLoading }) => {
           },
           legs: [
             {
-              departure: segment.departure.at,
+              departure: firstSegment.departure.at,
               arrival: lastSegment.arrival.at,
-              origin: { displayCode: segment.departure.iataCode },
+              origin: { displayCode: firstSegment.departure.iataCode },
               destination: { displayCode: lastSegment.arrival.iataCode },
-              durationInMinutes: itinerary.duration
-                .replace("PT", "")
-                .replace("H", "h ")
-                .replace("M", "m")
-                .trim(),
-              stopCount: itinerary.segments.length - 1,
+              durationInMinutes: totalMinutes,
+              stopCount: segments.length - 1,
               carriers: {
                 marketing: [
                   {
