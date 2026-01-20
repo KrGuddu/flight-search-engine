@@ -37,7 +37,7 @@ const getAccessToken = async () => {
 // ✅ Validate IATA codes
 const isValidIATACode = (code) => /^[A-Z]{3}$/.test(code.toUpperCase());
 
-// ✈️ Flight Search Endpoint
+// ✈️ Flight Search Endpoint 
 router.get("/", async (req, res) => {
   let { origin, destination, date, returnDate } = req.query;
 
