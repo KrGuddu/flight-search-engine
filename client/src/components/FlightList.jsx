@@ -12,13 +12,11 @@ const FlightList = ({ flightData, isLoading }) => {
 
   const formatDuration = (minutes) => {
     const hrs = Math.floor(minutes / 60)
-    const mins = minutes % 60
+    const mins = Math.floor(minutes % 60)
     return `${hrs}h ${mins}m`
   }
 
-  if (!Array.isArray(flightData)) {
-    return null
-  }
+  if (!Array.isArray(flightData)) return null
 
   const handleShowMore = () => {
     setDisplayCount(prev => prev + 5)
@@ -37,7 +35,7 @@ const FlightList = ({ flightData, isLoading }) => {
         position: 'absolute', top: '50%', left: '50%',
         transform: 'translate(-50%, -50%)', zIndex: 40
       }}>
-        {isLoading && <PacmanLoader loading={isLoading} color="#d5d5d5" size={100} width={"50%"} height={10} speedMultiplier={0.5} />}
+        {isLoading && <PacmanLoader loading={isLoading} size={100} speedMultiplier={0.5} />}
       </div>
 
       <div className="w-full max-w-2xl">
@@ -46,7 +44,11 @@ const FlightList = ({ flightData, isLoading }) => {
             {itinerary.legs.map((leg, legIndex) => (
               <div key={legIndex} className="flex flex-col md:flex-row justify-between items-stretch pt-2 space-y-2 md:space-y-0">
                 <div className="flex items-center space-x-4">
-                  <img src={leg.carriers.marketing[0].logoUrl} alt={leg.carriers.marketing[0].name} className="h-10 w-10 mr-3 rounded-lg dark:border dark:outline" />
+                  <img
+                    src={leg.carriers.marketing[0].logoUrl}
+                    alt={leg.carriers.marketing[0].name}
+                    className="h-10 w-10 mr-3 rounded-lg dark:border dark:outline"
+                  />
                   <div>
                     <p className="text-lg md:xl font-semibold">{formatTime(leg.departure)}</p>
                     <p><strong className="text-xl md:2xl">{leg.origin.displayCode}</strong></p>

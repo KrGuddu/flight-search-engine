@@ -7,7 +7,7 @@ const InputDate = ({ selectedOption, departureDate, setDepartureDate, returnDate
 
   const handleDepartureDate = (newValue) => {
     const formattedDate = dayjs(newValue).format('YYYY-MM-DD')
-    if (returnDate && dayjs(formattedDate).isAfter(departureDate)) {
+    if (returnDate && dayjs(formattedDate).isAfter(returnDate)) {
       alert('Return cannot be before the departure.')
       return
     }

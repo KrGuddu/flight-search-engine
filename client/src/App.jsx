@@ -11,7 +11,7 @@ function App() {
   return (
     <div className='relative min-h-[100vh] dark:bg-gray-700 dark:text-white'>
       <div className="pb-[2.5rem]">
-        {flightData.length === 0 && <img src={homebg} alt="boat" height={29} />}
+        {flightData.length === 0 && <img src={homebg} alt="home" />}
         <div className="md:px-12">
           <Input setFlightData={setFlightData} setIsLoading={setIsLoading} />
         </div>

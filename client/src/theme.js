@@ -1,6 +1,8 @@
 import { createTheme } from '@mui/material/styles'
 
-const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+const isDarkMode =
+  typeof window !== "undefined" &&
+  window.matchMedia("(prefers-color-scheme: dark)").matches
 
 const theme = createTheme({
   palette: {
@@ -11,7 +13,7 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           "& .MuiOutlinedInput-notchedOutline": {
-            borderColor: isDarkMode ? 'grey' : 'grey',
+            borderColor: 'grey',
           },
           "&:hover .MuiOutlinedInput-notchedOutline": {
             borderColor: isDarkMode ? 'white' : 'black',
@@ -24,13 +26,6 @@ const theme = createTheme({
           color: isDarkMode ? 'white' : 'black',
           backgroundColor: isDarkMode ? 'transparent' : 'white',
         }
-      },
-    },
-    MuiPickersBasePicker: {
-      styleOverrides: {
-        pickerView: {
-          backgroundColor: isDarkMode ? 'transparent' : 'white',
-        },
       },
     },
   },
