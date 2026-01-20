@@ -67,6 +67,7 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+// import flightRoutes from "../routes/flights.js";
 import flightRoutes from "../routes/flights.js";
 
 dotenv.config();
