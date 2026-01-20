@@ -19,4 +19,4 @@ async function fetchFromAPI(originCode, destCode, departureDate, returnDate) {
   }
 }
 
-export default fetchFromAPI
+export default fetchFromAPI;
