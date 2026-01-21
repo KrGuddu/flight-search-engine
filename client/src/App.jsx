@@ -1,5 +1,5 @@
 import './App.css'
-import homebg from './assets/imgs/homebg.jpg'
+import homebg from './assets/imgs/homebg2.png'
 import { FlightList, Footer, Input } from './components'
 import { useState } from 'react'
 import { Analytics } from '@vercel/analytics/react'
